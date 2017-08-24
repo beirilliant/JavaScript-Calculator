@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <style type="text/css">
+
     body {
       background-color: #F0F0F0;
     }
@@ -30,51 +31,50 @@
 
     .normalSec {
       width: 80%;
-      border: 1px solid grey;
-      margin: 10px;
     }
 
     .smallSec {
-      width: 55%;
-      border: 1px solid grey;
-      margin: 10px 0 10px 10px;
+      width: 60%;
     }
 
+    #verticalDiv {
+      position: relative;
+      left: -48px;
+      top: -1px;
+    }
+
+    .normalSec, .smallSec, #verticalDiv {
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
 
     .btn {
       height: 65px;
       width: 65px;
-      margin-right: 10px;
+      margin: 10px 10px;
       border-radius: 10px;
-      font-size: 120%;
+      font-size: 150%;
     
     }
 
     #equalBtn {
 
-      height: 152px;
-      margin-right: 40px;
+      height: 150px;
+      align-self: stretch;
 
     }
 
     #zeroBtn {
-      width: 144px;
+      width: 150px;
     }
 
     .pull-right {
       float: right;!important
     }
 
-    #verticalDiv {
-      margin-top: 10px;
-      margin-right: 10px;
-      border: 1px solid grey;
-    }
 
-    .normalSec, .smallSec, #verticalDiv {
 
-      border: 1px solid grey;
-    }
 
 
     </style>
@@ -85,7 +85,9 @@
       <div id="screen" class="container center rounded">
       </div>
 
-      <div class="normalSec pull-right">
+      <div id="flexarea">
+
+      <div class="normalSec">
           <button class="btn btn-rounded btn-danger">AC</button>
           <button class="btn btn-rounded btn-danger">CE</button>
           <button class="btn btn-rounded btn-dark">/</button>
@@ -93,7 +95,7 @@
                 
         </div>
 
-        <div class="normalSec pull-right">
+        <div class="normalSec">
           <button class="btn btn-rounded btn-dark">7</button>
           <button class="btn btn-rounded btn-dark">8</button>
           <button class="btn btn-rounded btn-dark">9</button>
@@ -101,36 +103,35 @@
             
         </div>
 
-        <div class="normalSec pull-right">
+        <div class="normalSec">
           <button class="btn btn-rounded btn-dark">4</button>
           <button class="btn btn-rounded btn-dark">5</button>
           <button class="btn btn-rounded btn-dark">6</button>
           <button class="btn btn-rounded btn-dark">+</button>
                
         </div>
-
+      <div id="verticalDiv" class="pull-right">
+      <button id="equalBtn" class="btn btn-rounded btn-dark">=</button>
+    </div>
         <div>
 
-            <div id="verticalDiv" class="pull-right">
-                <button id="equalBtn" class="btn btn-rounded btn-dark btn-inline">=</button>
-            </div>
-
-            <div class="smallSec pull-right">
+            <div class="smallSec">
               <button class="btn btn-rounded btn-dark">1</button>
               <button class="btn btn-rounded btn-dark">2</button>
               <button class="btn btn-rounded btn-dark">3</button>
             </div>
 
-            <div class="smallSec pull-right">      
-
+        <div class="smallSec">
               <button id="zeroBtn" class="btn btn-rounded btn-dark">0</button>
               <button class="btn btn-rounded btn-lg btn-dark">.</button>    
+
+            
             </div>
 
 
         </div>
 
-
+      </div>
 
     </div>
 
