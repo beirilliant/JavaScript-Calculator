@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <style type="text/css">
+
     body {
       background-color: #F0F0F0;
     }
@@ -30,21 +31,30 @@
 
     .normalSec {
       width: 80%;
-      margin: 0 auto;
     }
 
     .smallSec {
       width: 60%;
-      margin: 0 auto;
     }
 
+    #verticalDiv {
+      position: relative;
+      left: -48px;
+      top: -1px;
+    }
+
+    .normalSec, .smallSec, #verticalDiv {
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+    }
 
     .btn {
       height: 65px;
       width: 65px;
       margin: 10px 10px;
       border-radius: 10px;
-      font-size: 120%;
+      font-size: 150%;
     
     }
 
@@ -63,18 +73,7 @@
       float: right;!important
     }
 
-    #verticalDiv {
-      margin: 0 auto;
-      position: relative;
-      left: -48px;
-      top: -1px;
-    }
 
-    .normalSec, .smallSec, #verticalDiv {
-
-      display: flex;
-      justify-content: center;
-    }
 
 
 
