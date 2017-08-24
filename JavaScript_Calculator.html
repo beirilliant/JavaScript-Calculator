@@ -35,16 +35,16 @@
     }
 
     .smallSec {
-      width: 55%;
+      width: 60%;
       border: 1px solid grey;
-      margin: 10px 0 10px 10px;
+      margin: 0 auto;
     }
 
 
     .btn {
       height: 65px;
       width: 65px;
-      margin-right: 10px;
+      margin: 10px 10px;
       border-radius: 10px;
       font-size: 120%;
     
@@ -58,7 +58,7 @@
     }
 
     #zeroBtn {
-      width: 142px;
+      width: 150px;
     }
 
     .pull-right {
@@ -66,7 +66,7 @@
     }
 
     #verticalDiv {
-      margin-top: 10px;
+      margin: 0 auto;
       border: 1px solid grey;
     }
 
@@ -112,20 +112,24 @@
           <button class="btn btn-rounded btn-dark">+</button>
                
         </div>
-
+      <div id="verticalDiv" class="pull-right">
+      <button id="equalBtn" class="btn btn-rounded btn-dark">=</button>
+    </div>
         <div>
 
-            <div class="normalSec">
+            <div class="smallSec">
               <button class="btn btn-rounded btn-dark">1</button>
               <button class="btn btn-rounded btn-dark">2</button>
               <button class="btn btn-rounded btn-dark">3</button>
-              <button id="equalBtn" class="btn btn-rounded btn-dark btn-inline">=</button>
-            </div>    
+            </div>
 
-            <div>
+        <div class="smallSec">
               <button id="zeroBtn" class="btn btn-rounded btn-dark">0</button>
               <button class="btn btn-rounded btn-lg btn-dark">.</button>    
+
+            
             </div>
+
 
         </div>
 
