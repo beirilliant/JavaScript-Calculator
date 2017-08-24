@@ -14,9 +14,9 @@
     }
 
     #frame {
-      margin-top: 80px;
+      margin-top: 70px;
       padding: 30px;
-      height: 600px;
+      height: 650px;
       width: 500px;
       border: 1px solid red;
     }
@@ -25,19 +25,21 @@
       height: 100px;
       width: 400px;
       border: 1px solid yellowgreen;
+      margin-bottom: 10px;
     }
 
     .normalSec {
       width: 80%;
       border: 1px solid grey;
-      margin: 10px;
+      margin: 0 auto;
     }
 
     .smallSec {
-      width: 80%;
+      width: 55%;
       border: 1px solid grey;
-      margin: 10px;
+      margin: 10px 0 10px 10px;
     }
+
 
     .btn {
       height: 65px;
@@ -50,13 +52,32 @@
 
     #equalBtn {
 
-      height: 140px;
+      height: 152px;
+      align-self: stretch;
 
     }
 
     #zeroBtn {
-      width: 144px;
+      width: 142px;
     }
+
+    .pull-right {
+      float: right;!important
+    }
+
+    #verticalDiv {
+      margin-top: 10px;
+      border: 1px solid grey;
+    }
+
+    .normalSec, .smallSec, #verticalDiv {
+
+      border: 1px solid grey;
+      display: flex;
+      justify-content: center;
+    }
+
+
 
     </style>
   </head>
@@ -65,43 +86,50 @@
       <h2 class="center">JavaScript Calculator</h2>
       <div id="screen" class="container center rounded">
       </div>
+
+      <div id="flexarea">
+
       <div class="normalSec">
           <button class="btn btn-rounded btn-danger">AC</button>
           <button class="btn btn-rounded btn-danger">CE</button>
           <button class="btn btn-rounded btn-dark">/</button>
-          <button class="btn btn-rounded btn-dark">x</button>           
+          <button class="btn btn-rounded btn-dark">x</button>
+                
         </div>
 
         <div class="normalSec">
           <button class="btn btn-rounded btn-dark">7</button>
           <button class="btn btn-rounded btn-dark">8</button>
           <button class="btn btn-rounded btn-dark">9</button>
-          <button class="btn btn-rounded btn-dark">-</button>           
+          <button class="btn btn-rounded btn-dark">-</button>
+            
         </div>
 
         <div class="normalSec">
           <button class="btn btn-rounded btn-dark">4</button>
           <button class="btn btn-rounded btn-dark">5</button>
           <button class="btn btn-rounded btn-dark">6</button>
-          <button class="btn btn-rounded btn-dark">+</button>           
+          <button class="btn btn-rounded btn-dark">+</button>
+               
         </div>
 
-        <div class="smallSec">
+        <div>
+
+            <div class="normalSec">
               <button class="btn btn-rounded btn-dark">1</button>
               <button class="btn btn-rounded btn-dark">2</button>
               <button class="btn btn-rounded btn-dark">3</button>
-            </div>
+              <button id="equalBtn" class="btn btn-rounded btn-dark btn-inline">=</button>
+            </div>    
 
-            <div class="smallSec">      
-
+            <div>
               <button id="zeroBtn" class="btn btn-rounded btn-dark">0</button>
               <button class="btn btn-rounded btn-lg btn-dark">.</button>    
             </div>
-            <div class="col-xs-3 container">
-                <button id="equalBtn" class="btn btn-rounded btn-dark btn-inline">=</button>
-            </div>
 
+        </div>
 
+      </div>
 
     </div>
 
