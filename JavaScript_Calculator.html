@@ -160,10 +160,17 @@
       }
       
       if (start == 1) {
+
       arr.push($(this).val());
       $("#screen").append($(this).val());
+
+      if ($.isNumeric($(this).val()) == false && $.isNumeric(arr[arr.length - 2]) == false) {
+          arr.splice(-2, 1);
+          $("#screen").html(arr.join(""));
+        }
       }
-    
+
+
     });
 
     $("#acBtn").click(function() {
