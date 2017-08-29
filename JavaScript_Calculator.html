@@ -87,6 +87,7 @@
       <h2 class="text-center">JavaScript Calculator</h2>
       <h4 class="text-right text-muted">By Bei Wang</h4>
       <div id="screen" class="container center">
+        0
     </div>
 
     <div id="flexarea">
@@ -94,24 +95,24 @@
       <div class="normalSec">
         <button id="acBtn" class="btn btn-rounded btn-danger">AC</button>
         <button id="ceBtn" class="btn btn-rounded btn-danger">CE</button>
-        <input id="divideBtn" class="btn btn-rounded btn-dark" value="&divide;">
-        <input id="timesBtn" class="btn btn-rounded btn-dark" value="&times;">
+        <input id="divideBtn" class="btn btn-rounded btn-dark" value="&divide;" readonly="readonly">
+        <input id="timesBtn" class="btn btn-rounded btn-dark" value="&times;" readonly="readonly">
                 
       </div>
 
       <div class="normalSec">
-        <input class="btn btn-rounded btn-dark" value="7">
-        <input class="btn btn-rounded btn-dark" value="8">
-        <input class="btn btn-rounded btn-dark" value="9">
-        <input class="btn btn-rounded btn-dark" value="&minus;">
+        <input class="btn btn-rounded btn-dark" value="7" readonly="readonly">
+        <input class="btn btn-rounded btn-dark" value="8" readonly="readonly">
+        <input class="btn btn-rounded btn-dark" value="9" readonly="readonly">
+        <input class="btn btn-rounded btn-dark" value="&minus;" readonly="readonly">
             
       </div>
 
       <div class="normalSec">
-        <input class="btn btn-rounded btn-dark" value="4">
-        <input class="btn btn-rounded btn-dark" value="5">
-        <input class="btn btn-rounded btn-dark" value="6">
-        <input class="btn btn-rounded btn-dark" value="&plus;">
+        <input class="btn btn-rounded btn-dark" value="4" readonly="readonly">
+        <input class="btn btn-rounded btn-dark" value="5" readonly="readonly">
+        <input class="btn btn-rounded btn-dark" value="6" readonly="readonly">
+        <input class="btn btn-rounded btn-dark" value="&plus;" readonly="readonly">
 
       </div>
 
@@ -122,15 +123,15 @@
       <div>
 
         <div class="smallSec">
-          <input class="btn btn-rounded btn-dark" value="1">
-          <input class="btn btn-rounded btn-dark" value="2">
-          <input class="btn btn-rounded btn-dark" value="3">
+          <input class="btn btn-rounded btn-dark" value="1" readonly="readonly">
+          <input class="btn btn-rounded btn-dark" value="2" readonly="readonly">
+          <input class="btn btn-rounded btn-dark" value="3" readonly="readonly">
 
         </div>
 
         <div class="smallSec">
-          <input id="zeroBtn" class="btn btn-rounded btn-dark" value="0">
-          <input class="btn btn-rounded btn-dark" value=".">
+          <input id="zeroBtn" class="btn btn-rounded btn-dark" value="0" readonly="readonly">
+          <input class="btn btn-rounded btn-dark" value="." readonly="readonly">
 
         </div>
 
@@ -150,9 +151,25 @@
     var arr = [];
 
     $("input").click(function() {
+
       arr.push($(this).val());
       $("#screen").append($(this).val());
+    
     });
+
+    $("#acBtn").click(function() {
+      arr = [];
+      $("#screen").html("0");
+
+    })
+
+    $("#ceBtn").click(function() {
+      arr.splice(-1, 1);
+      $("#screen").html(arr.join(""));
+
+      
+
+    })
 
 
 
