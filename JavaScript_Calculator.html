@@ -149,17 +149,27 @@
     <script type="text/javascript">
 
     var arr = [];
+    var start = 0;
 
     $("input").click(function() {
 
+      if (start == 0) {
+
+        $("#screen").html("");
+        start = 1;
+      }
+      
+      if (start == 1) {
       arr.push($(this).val());
       $("#screen").append($(this).val());
+      }
     
     });
 
     $("#acBtn").click(function() {
       arr = [];
       $("#screen").html("0");
+      start = 0;
 
     })
 
