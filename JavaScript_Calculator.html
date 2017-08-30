@@ -95,46 +95,46 @@
       <div class="normalSec">
         <button id="acBtn" class="btn btn-rounded btn-danger">AC</button>
         <button id="ceBtn" class="btn btn-rounded btn-danger">CE</button>
-        <input id="divideBtn" class="btn btn-rounded btn-dark" value="&divide;" readonly="readonly">
-        <input id="timesBtn" class="btn btn-rounded btn-dark" value="&times;" readonly="readonly">
+        <button class="btn btn-rounded btn-dark calBtn" value="/" name="&divide;">&divide;</button>
+        <button class="btn btn-rounded btn-dark calBtn" value="*" name="&times;">&times;</button>
                 
       </div>
 
       <div class="normalSec">
-        <input class="btn btn-rounded btn-dark" value="7" readonly="readonly">
-        <input class="btn btn-rounded btn-dark" value="8" readonly="readonly">
-        <input class="btn btn-rounded btn-dark" value="9" readonly="readonly">
-        <input class="btn btn-rounded btn-dark" value="&minus;" readonly="readonly">
+        <button class="btn btn-rounded btn-dark calBtn" value="7" name="7">7</button>
+        <button class="btn btn-rounded btn-dark calBtn" value="8" name="8">8</button>
+        <button class="btn btn-rounded btn-dark calBtn" value="9" name="9">9</button>
+        <button class="btn btn-rounded btn-dark calBtn" value="-" name="&minus;">&minus;</button>
+
             
       </div>
 
       <div class="normalSec">
-        <input class="btn btn-rounded btn-dark" value="4" readonly="readonly">
-        <input class="btn btn-rounded btn-dark" value="5" readonly="readonly">
-        <input class="btn btn-rounded btn-dark" value="6" readonly="readonly">
-        <input class="btn btn-rounded btn-dark" value="&plus;" readonly="readonly">
+        <button class="btn btn-rounded btn-dark calBtn" value="4" name="4">4</button>
+        <button class="btn btn-rounded btn-dark calBtn" value="5" name="5">5</button>
+        <button class="btn btn-rounded btn-dark calBtn" value="6" name="6">6</button>
+        <button class="btn btn-rounded btn-dark calBtn" value="+" name="+">+</button>
 
       </div>
 
       <div id="verticalDiv" class="pull-right">
-        <button id="equalBtn" class="btn btn-rounded btn-dark">&equals;</button>
+        <button id="equalBtn" class="btn btn-rounded btn-dark">=</button>
       </div>
 
       <div>
 
         <div class="smallSec">
-          <input class="btn btn-rounded btn-dark" value="1" readonly="readonly">
-          <input class="btn btn-rounded btn-dark" value="2" readonly="readonly">
-          <input class="btn btn-rounded btn-dark" value="3" readonly="readonly">
+          <button class="btn btn-rounded btn-dark calBtn" value="1" name="1">1</button>
+          <button class="btn btn-rounded btn-dark calBtn" value="2" name="2">2</button>
+          <button class="btn btn-rounded btn-dark calBtn" value="3" name="3">3</button>
 
         </div>
 
         <div class="smallSec">
-          <input id="zeroBtn" class="btn btn-rounded btn-dark" value="0" readonly="readonly">
-          <input class="btn btn-rounded btn-dark" value="." readonly="readonly">
+          <button id="zeroBtn" class="btn btn-rounded btn-dark calBtn" value="0" name="0">0</button>
+          <button class="btn btn-rounded btn-dark calBtn" value="." name=".">.</button>
 
         </div>
-
 
       </div>
 
@@ -150,8 +150,9 @@
 
     var arr = [];
     var start = 0;
+    var result;
 
-    $("input").click(function() {
+    $(".calBtn").click(function() {
 
       if (start == 0) {
 
@@ -171,16 +172,15 @@
       
       if (start == 1) {
 
-      arr.push($(this).val());
-      $("#screen").append($(this).val());
+        arr.push($(this).val());
+        
+        $("#screen").append($(this).val());
 
-      if ($.isNumeric($(this).val()) == false && $.isNumeric(arr[arr.length - 2]) == false && arr.length >= 2) {
+        if ($.isNumeric($(this).val()) == false && $.isNumeric(arr[arr.length - 2]) == false && arr.length >= 2) {
           arr.splice(-2, 1);
           $("#screen").html(arr.join(""));
         }
       }
-
-
     });
 
     $("#acBtn").click(function() {
@@ -188,19 +188,29 @@
       $("#screen").html("0");
       start = 0;  
 
-    })
+    });
 
     $("#ceBtn").click(function() {
-
+      
       arr.splice(-1, 1);
       if (arr.length == 0) {
         $("#screen").html("0");
         start = 0;
       } else {
       $("#screen").html(arr.join(""));
-      }     
+      }
 
-    })
+    });
+
+    $("#equalBtn").click(function() {
+      var str = arr.join("");
+      console.log(str);
+      result = eval(str);
+      $("#screen").html(result);
+      arr = [];
+      arr.push(result);    
+
+    });
 
     </script>
   </body>
