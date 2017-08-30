@@ -155,8 +155,18 @@
 
       if (start == 0) {
 
+        if ($.isNumeric($(this).val()) == false) {
+          arr.push("0");
+          $("#screen").html("0");
+
+        } else {
+
         $("#screen").html("");
+
+        }
+
         start = 1;
+
       }
       
       if (start == 1) {
@@ -164,7 +174,7 @@
       arr.push($(this).val());
       $("#screen").append($(this).val());
 
-      if ($.isNumeric($(this).val()) == false && $.isNumeric(arr[arr.length - 2]) == false) {
+      if ($.isNumeric($(this).val()) == false && $.isNumeric(arr[arr.length - 2]) == false && arr.length >= 2) {
           arr.splice(-2, 1);
           $("#screen").html(arr.join(""));
         }
@@ -188,14 +198,9 @@
         start = 0;
       } else {
       $("#screen").html(arr.join(""));
-      }
-
-      
+      }     
 
     })
-
-
-
 
     </script>
   </body>
