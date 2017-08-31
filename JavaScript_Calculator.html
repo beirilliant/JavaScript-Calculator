@@ -87,7 +87,13 @@
       <h2 class="text-center">JavaScript Calculator</h2>
       <h4 class="text-right text-muted">By Bei Wang</h4>
       <div id="screen" class="container center">
+        <div id="topDisplay" class="pull-right">
         0
+        </div>
+
+        <div id="bottomDisplay" class="pull-right">
+
+        </div>
     </div>
 
     <div id="flexarea">
@@ -160,11 +166,11 @@
         if ($.isNumeric($(this).val()) == false) {
           arr.push("0");
           newArr.push("0");
-          $("#screen").html("0");
+          $("#topDisplay").html("0");
 
         } else {
 
-        $("#screen").html("");
+        $("#topDisplay").html("");
 
         }
 
@@ -177,12 +183,12 @@
         arr.push($(this).val());
         newArr.push($(this).attr("name"));
         
-        $("#screen").append($(this).attr("name"));
+        $("#topDisplay").append($(this).attr("name"));
 
         if ($.isNumeric($(this).val()) == false && $.isNumeric(arr[arr.length - 2]) == false && arr.length >= 2) {
           arr.splice(-2, 1);
           newArr.splice(-2, 1);
-          $("#screen").html(newArr.join(""));
+          $("#topDisplay").html(newArr.join(""));
         }
       }
     });
@@ -190,7 +196,7 @@
     $("#acBtn").click(function() {
       arr = [];
       newArr = [];
-      $("#screen").html("0");
+      $("#topDisplay").html("0");
       start = 0;  
 
     });
@@ -200,10 +206,10 @@
       arr.splice(-1, 1);
       newArr.splice(-1, 1);
       if (arr.length == 0) {
-        $("#screen").html("0");
+        $("#topDisplay").html("0");
         start = 0;
       } else {
-      $("#screen").html(newArr.join(""));
+      $("#topDisplay").html(newArr.join(""));
       }
 
     });
@@ -212,7 +218,7 @@
       var str = arr.join("");
       console.log(str);
       result = eval(str);
-      $("#screen").html(result);
+      $("#topDisplay").html(result);
       arr = [];
       newArr = [];
       arr.push(result);
