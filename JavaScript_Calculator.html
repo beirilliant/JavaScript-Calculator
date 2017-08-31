@@ -257,10 +257,6 @@
           $("#bottomDisplay").html($(this).attr("name"));
 
         }
-        
-
-
-
 
         // Check if the clicked btn is an operation sign. If so, display its "name" attr at the bottom display section.
         if ($.isNumeric($(this).val()) == false && $(this).val() !== "\.") {
@@ -294,9 +290,11 @@
       newArr.splice(-1, 1);
       if (arr.length == 0) {
         $("#topDisplay").html("0");
+        $("#bottomDisplay").html("0")
         start = 0;
       } else {
       $("#topDisplay").html(newArr.join(""));
+      $("#bottomDisplay").html(newArr.join(""));
       }
 
     });
