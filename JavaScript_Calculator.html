@@ -182,10 +182,12 @@
           arr.push("0");
           newArr.push("0");
           $("#topDisplay").html("0");
+          $("#bottomDisplay").html("0");
 
         } else {
 
         $("#topDisplay").html("");
+        $("#bottomDisplay").html("");
 
         }
 
@@ -199,12 +201,26 @@
         newArr.push($(this).attr("name"));
         
         $("#topDisplay").append($(this).attr("name"));
+        $("#bottomDisplay").append($(this).attr("name"));
 
         if ($.isNumeric($(this).val()) == false && $.isNumeric(arr[arr.length - 2]) == false && arr.length >= 2) {
           arr.splice(-2, 1);
           newArr.splice(-2, 1);
           $("#topDisplay").html(newArr.join(""));
+          $("#bottomDisplay").html($(this).attr("name"));
+
         }
+
+        if ($.isNumeric($(this).val()) == false) {
+          $("#bottomDisplay").html($(this).attr("name"));
+
+        }
+
+        if ($.isNumeric($(this).val()) && $.isNumeric(arr[arr.length - 2]) == false) {
+          $("#bottomDisplay").html($(this).attr("name"));
+
+        }
+
       }
     });
 
@@ -212,6 +228,7 @@
       arr = [];
       newArr = [];
       $("#topDisplay").html("0");
+      $("#bottomDisplay").html("0");
       start = 0;  
 
     });
@@ -233,7 +250,8 @@
       var str = arr.join("");
       console.log(str);
       result = eval(str);
-      $("#topDisplay").html(result);
+      $("#topDisplay").append("=" + result);
+      $("#bottomDisplay").html(result);
       arr = [];
       newArr = [];
       arr.push(result);
