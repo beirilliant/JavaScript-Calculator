@@ -169,14 +169,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script type="text/javascript">
 
-    var arr = [];
-    var newArr = [];
-    var start = 0;
-    var result;
-    var count = 0;
+    var arr = [];  // Empty array to contain numbers and equation symbols
+    var newArr = []; // Empty array to contain numbers and HTML entities of equation symbols to display on the top section of the screen
+    var start = 0; // 0: the initial stage without any btn clicked; 1: some btn clicked.
+    var result;  // To store the calculation result.
+    var count = 0;   //0: equal btn not clicked; 1: equal btn clicked.
 
     $(".calBtn").click(function() {
-      //Check if equal button is clicked, then reset or chain the following calculation
+
+      // Below code: Check if equal button is clicked, then reset or chain the following calculation.
       if (count == 1 && $.isNumeric($(this).val())) {
 
           arr = [];
@@ -193,17 +194,17 @@
           count = 0;
         }
 
-      // Above code: Check if equal button is clicked, then reset or chain the following calculation
+      // Above code: Check if equal button is clicked, then reset or chain the following calculation.
 
-      if (start == 0) {
+      if (start == 0) {  // If no btn is clicked, meaning an initial stage
 
-        if ($.isNumeric($(this).val()) == false) {
+        if ($.isNumeric($(this).val()) == false) {  // Check if the clicked btn is a number btn. If not, chain calculations can be performed with the initial "0".
           arr.push("0");
           newArr.push("0");
           $("#topDisplay").html("0");
           $("#bottomDisplay").html("0");
 
-        } else {
+        } else { // If the clicked btn is a number, make the initial "0" disappear and start with the clicked number.
 
         $("#topDisplay").html("");
         $("#bottomDisplay").html("");
@@ -214,7 +215,7 @@
 
       }
       
-      if (start == 1) {
+      if (start == 1) { // If some btn has been clicked.
 
         arr.push($(this).val());
         newArr.push($(this).attr("name"));
@@ -222,6 +223,7 @@
         $("#topDisplay").append($(this).attr("name"));
         $("#bottomDisplay").append($(this).attr("name"));
 
+        // Check if two or more operation symbols are continously clicked. If so, only accept the last one.
         if ($.isNumeric($(this).val()) == false && $.isNumeric(arr[arr.length - 2]) == false && arr.length >= 2) {
           arr.splice(-2, 1);
           newArr.splice(-2, 1);
@@ -230,11 +232,13 @@
 
         }
 
+        // Check if the clicked btn is an operation sign. If so, display its "name" attr.
         if ($.isNumeric($(this).val()) == false) {
           $("#bottomDisplay").html($(this).attr("name"));
 
         }
-
+        
+        // Check if a number btn is clicked after an operation symbol. If so, only show the number without the operation symbol at the bottom display section.
         if ($.isNumeric($(this).val()) && $.isNumeric(arr[arr.length - 2]) == false) {
           $("#bottomDisplay").html($(this).attr("name"));
 
@@ -243,6 +247,7 @@
       }
     });
 
+   // Run function when AC btn is clicked.
     $("#acBtn").click(function() {
       arr = [];
       newArr = [];
@@ -252,6 +257,7 @@
 
     });
 
+   // Run function when CE btn is clicked.
     $("#ceBtn").click(function() {
       
       arr.splice(-1, 1);
@@ -265,6 +271,7 @@
 
     });
 
+    // Run function when equal btn is clicked.
     $("#equalBtn").click(function() {
       var str = arr.join("");
       console.log(str);
