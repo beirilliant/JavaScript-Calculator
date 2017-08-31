@@ -178,7 +178,8 @@
     $(".calBtn").click(function() {
 
       // Below code: Check if equal button is clicked, then reset or chain the following calculation.
-      if (count == 1 && $.isNumeric($(this).val())) {
+      if (count == 1) {
+        if ($.isNumeric($(this).val())) {
 
           arr = [];
           newArr = [];
@@ -189,11 +190,26 @@
 
         }
 
-      if (count == 1 && $.isNumeric($(this).val()) == false) {
+        if ($.isNumeric($(this).val()) == false && $(this).val() !== "\.") {
           $("#topDisplay").html(result);
           count = 0;
         }
 
+        if ($(this).val() == "\.") {
+
+          arr = [];
+          newArr = [];
+          arr.push("0");
+          arr.push(".");
+          newArr.push("0");
+          newArr.push(".");
+          $("#topDisplay").html("0.");
+          $("#bottomDisplay").html("0.");
+          count = 0;
+
+        }
+
+      }
       // Above code: Check if equal button is clicked, then reset or chain the following calculation.
 
       if (start == 0) {  // If no btn is clicked, meaning an initial stage
