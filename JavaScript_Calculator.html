@@ -173,8 +173,27 @@
     var newArr = [];
     var start = 0;
     var result;
+    var count = 0;
 
     $(".calBtn").click(function() {
+      //Check if equal button is clicked, then reset or chain the following calculation
+      if (count == 1 && $.isNumeric($(this).val())) {
+
+          arr = [];
+          newArr = [];
+          $("#topDisplay").html("0");
+          $("#bottomDisplay").html("0");
+          start = 0; 
+          count = 0;
+
+        }
+
+      if (count == 1 && $.isNumeric($(this).val()) == false) {
+          $("#topDisplay").html(result);
+          count = 0;
+        }
+
+      // Above code: Check if equal button is clicked, then reset or chain the following calculation
 
       if (start == 0) {
 
@@ -255,7 +274,8 @@
       arr = [];
       newArr = [];
       arr.push(result);
-      newArr.push(result);   
+      newArr.push(result);
+      count = 1;
 
     });
 
