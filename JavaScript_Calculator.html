@@ -232,7 +232,7 @@
 
         }
 
-        // Check if the clicked btn is an operation sign. If so, display its "name" attr.
+        // Check if the clicked btn is an operation sign. If so, display its "name" attr at the bottom display section.
         if ($.isNumeric($(this).val()) == false) {
           $("#bottomDisplay").html($(this).attr("name"));
 
@@ -276,6 +276,7 @@
       var str = arr.join("");
       console.log(str);
       result = eval(str);
+      result = parseFloat(result.toFixed(6))
       $("#topDisplay").append("=" + result);
       $("#bottomDisplay").html(result);
       arr = [];
