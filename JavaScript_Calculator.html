@@ -219,9 +219,19 @@
 
         arr.push($(this).val());
         newArr.push($(this).attr("name"));
-        
+
+        // Check if two or more decimal points are continously clicked. If so, only accept the last one.
+        if ($(this).val() == "\." && arr[arr.length - 2] == "\.") {
+          arr.splice(-2, 1);
+          newArr.splice(-2, 1);
+          $("#topDisplay").html(newArr.join(""));
+
+        } else {
+
         $("#topDisplay").append($(this).attr("name"));
         $("#bottomDisplay").append($(this).attr("name"));
+
+        }
 
         // Check if two or more operation symbols are continously clicked. If so, only accept the last one.
         if ($.isNumeric($(this).val()) == false && $(this).val() !== "\." && $.isNumeric(arr[arr.length - 2]) == false && arr[arr.length - 2] !== "\." && arr.length >= 2) {
@@ -231,6 +241,10 @@
           $("#bottomDisplay").html($(this).attr("name"));
 
         }
+        
+
+
+
 
         // Check if the clicked btn is an operation sign. If so, display its "name" attr at the bottom display section.
         if ($.isNumeric($(this).val()) == false && $(this).val() !== "\.") {
