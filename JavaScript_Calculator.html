@@ -149,6 +149,7 @@
     <script type="text/javascript">
 
     var arr = [];
+    var newArr = [];
     var start = 0;
     var result;
 
@@ -158,6 +159,7 @@
 
         if ($.isNumeric($(this).val()) == false) {
           arr.push("0");
+          newArr.push("0");
           $("#screen").html("0");
 
         } else {
@@ -173,18 +175,21 @@
       if (start == 1) {
 
         arr.push($(this).val());
+        newArr.push($(this).attr("name"));
         
-        $("#screen").append($(this).val());
+        $("#screen").append($(this).attr("name"));
 
         if ($.isNumeric($(this).val()) == false && $.isNumeric(arr[arr.length - 2]) == false && arr.length >= 2) {
           arr.splice(-2, 1);
-          $("#screen").html(arr.join(""));
+          newArr.splice(-2, 1);
+          $("#screen").html(newArr.join(""));
         }
       }
     });
 
     $("#acBtn").click(function() {
       arr = [];
+      newArr = [];
       $("#screen").html("0");
       start = 0;  
 
@@ -193,11 +198,12 @@
     $("#ceBtn").click(function() {
       
       arr.splice(-1, 1);
+      newArr.splice(-1, 1);
       if (arr.length == 0) {
         $("#screen").html("0");
         start = 0;
       } else {
-      $("#screen").html(arr.join(""));
+      $("#screen").html(newArr.join(""));
       }
 
     });
@@ -208,7 +214,9 @@
       result = eval(str);
       $("#screen").html(result);
       arr = [];
-      arr.push(result);    
+      newArr = [];
+      arr.push(result);
+      newArr.push(result);   
 
     });
 
