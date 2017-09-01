@@ -189,13 +189,13 @@
             $("#topDisplay").html("0");
             $("#bottomDisplay").html("0");
             start = 0; 
-            count = 0;
 
           }
 
           if ($.isNumeric($(this).val()) == false && $(this).val() !== "\.") {
+            
             $("#topDisplay").html(result);
-            count = 0;
+
           }
 
           if ($(this).val() == "\.") {
@@ -208,9 +208,10 @@
             newArr.push(".");
             $("#topDisplay").html("0.");
             $("#bottomDisplay").html("0.");
-            count = 0;
 
           }
+
+          count = 0;
 
         }
         // Above code: Check if equal button is clicked, then reset or chain the following calculation.
@@ -270,6 +271,7 @@
 
           // Check if two or more decimal points are continously clicked. If so, only accept the last one.
           if ($(this).val() == "\." && arr[arr.length - 2] == "\.") {
+
             arr.splice(-2, 1);
             newArr.splice(-2, 1);
             $("#topDisplay").html(newArr.join(""));
@@ -381,8 +383,6 @@
         count = 1;
 
       });
-
-
 
     });
 
