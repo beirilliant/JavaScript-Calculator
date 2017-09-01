@@ -174,7 +174,7 @@
     var start = 0; // 0: the initial stage without any btn clicked; 1: some btn clicked.
     var result;  // To store the calculation result.
     var count = 0;   //0: equal btn not clicked; 1: equal btn clicked.
-    var ptCount = 0;
+    var ptCount = 0;  // 0: No decimal point is entered before an operation symbol; 1: A decimal point is entered.
 
     $(".calBtn").click(function() {
 
@@ -235,13 +235,30 @@
       
       if (start == 1) { // If some btn has been clicked.
 
-        // Check if demical point "." is clicked after an operation symbol. If so, append "0" to both top and bottom display sections.
+        // Check if decimal point "." is clicked after an operation symbol. If so, append "0" to both top and bottom display sections.
         if ($(this).val() == "\." && $.isNumeric(arr[arr.length - 1]) == false && arr[arr.length - 1] !== ".") {
 
           arr.push("0");
           newArr.push("0");
           $("#topDisplay").append("0");
           $("#bottomDisplay").html("0");
+
+        }
+
+        // Check if the decimal is entered for the first time
+        if ($(this).val() == "\." && ptCount == 0) {
+
+          ptCount = 1;  // If so, make ptCount = 1
+        
+        // Check if the only one decimal point is entered before an operation symbol
+        } else if ($.isNumeric($(this).val()) == false && $(this).val() !== "\." && ptCount == 1) {
+
+          ptCount = 0;  //If so, make ptCount = 0
+
+        // Check if more than one decimal point is entered before an operation symbol
+        } else if ($(this).val() == "\." && ptCount == 1) {
+
+          return  // If so, return and escape the function without doing anything, meaning only one decimal point is allowed to enter before an operation symbol
 
         }
         
@@ -261,6 +278,7 @@
         $("#bottomDisplay").append($(this).attr("name"));
 
         }
+
 
 
 
