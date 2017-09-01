@@ -96,7 +96,6 @@
     </style>
   </head>
 
-
   <body>
     <div id="frame" class="container center">
       <h2 class="text-center">JavaScript Calculator</h2>
@@ -169,184 +168,221 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script type="text/javascript">
 
-    var arr = [];  // Empty array to contain numbers and equation symbols
-    var newArr = []; // Empty array to contain numbers and HTML entities of equation symbols to display on the top section of the screen
-    var start = 0; // 0: the initial stage without any btn clicked; 1: some btn clicked.
-    var result;  // To store the calculation result.
-    var count = 0;   //0: equal btn not clicked; 1: equal btn clicked.
-    var ptCount = 0;  // 0: No decimal point is entered before an operation symbol; 1: A decimal point is entered.
+    $(document).ready(function() {
 
-    $(".calBtn").click(function() {
+      var arr = [];  // Empty array to contain numbers and equation symbols
+      var newArr = []; // Empty array to contain numbers and HTML entities of equation symbols to display on the top section of the screen
+      var start = 0; // 0: the initial stage without any btn clicked; 1: some btn clicked.
+      var result;  // To store the calculation result.
+      var count = 0;   //0: equal btn not clicked; 1: equal btn clicked.
+      var ptCount = 0;  // 0: No decimal point is entered before an operation symbol; 1: A decimal point is entered.
 
-      // Below code: Check if equal button is clicked, then reset or chain the following calculation.
-      if (count == 1) {
+      $(".calBtn").click(function() {
 
-        if ($.isNumeric($(this).val())) {
+        // Below code: Check if equal button is clicked, then reset or chain the following calculation.
+        if (count == 1) {
 
-          arr = [];
-          newArr = [];
-          $("#topDisplay").html("0");
-          $("#bottomDisplay").html("0");
-          start = 0; 
-          count = 0;
+          if ($.isNumeric($(this).val())) {
 
-        }
+            arr = [];
+            newArr = [];
+            $("#topDisplay").html("0");
+            $("#bottomDisplay").html("0");
+            start = 0; 
+            count = 0;
 
-        if ($.isNumeric($(this).val()) == false && $(this).val() !== "\.") {
-          $("#topDisplay").html(result);
-          count = 0;
-        }
+          }
 
-        if ($(this).val() == "\.") {
+          if ($.isNumeric($(this).val()) == false && $(this).val() !== "\.") {
+            $("#topDisplay").html(result);
+            count = 0;
+          }
 
-          arr = [];
-          newArr = [];
-          arr.push("0");
-          arr.push(".");
-          newArr.push("0");
-          newArr.push(".");
-          $("#topDisplay").html("0.");
-          $("#bottomDisplay").html("0.");
-          count = 0;
+          if ($(this).val() == "\.") {
 
-        }
+            arr = [];
+            newArr = [];
+            arr.push("0");
+            arr.push(".");
+            newArr.push("0");
+            newArr.push(".");
+            $("#topDisplay").html("0.");
+            $("#bottomDisplay").html("0.");
+            count = 0;
 
-      }
-      // Above code: Check if equal button is clicked, then reset or chain the following calculation.
-
-      if (start == 0) {  // If no btn is clicked, meaning an initial stage
-
-        if ($.isNumeric($(this).val()) == false) {  // Check if the clicked btn is a number btn. If not, chain calculations can be performed with the initial "0".
-          arr.push("0");
-          newArr.push("0");
-          $("#topDisplay").html("0");
-          $("#bottomDisplay").html("0");
-
-        } else { // If the clicked btn is a number, make the initial "0" disappear and start with the clicked number.
-
-        $("#topDisplay").html("");
-        $("#bottomDisplay").html("");
+          }
 
         }
+        // Above code: Check if equal button is clicked, then reset or chain the following calculation.
 
-        start = 1;
+        if (start == 0) {  // If no btn is clicked, meaning an initial stage
 
-      }
+          if ($.isNumeric($(this).val()) == false) {  // Check if the clicked btn is a number btn. If not, chain calculations can be performed with the initial "0".
+            
+            arr.push("0");
+            newArr.push("0");
+            $("#topDisplay").html("0");
+            $("#bottomDisplay").html("0");
+
+          } else { // If the clicked btn is a number, make the initial "0" disappear and start with the clicked number.
+
+          $("#topDisplay").html("");
+          $("#bottomDisplay").html("");
+
+          }
+
+          start = 1;
+
+        }
       
-      if (start == 1) { // If some btn has been clicked.
+        if (start == 1) { // If some btn has been clicked.
 
-        // Check if decimal point "." is clicked after an operation symbol. If so, append "0" to both top and bottom display sections.
-        if ($(this).val() == "\." && $.isNumeric(arr[arr.length - 1]) == false && arr[arr.length - 1] !== ".") {
+          // Check if decimal point "." is clicked after an operation symbol. If so, append "0" to both top and bottom display sections.
+          if ($(this).val() == "\." && $.isNumeric(arr[arr.length - 1]) == false && arr[arr.length - 1] !== ".") {
 
-          arr.push("0");
-          newArr.push("0");
-          $("#topDisplay").append("0");
+            arr.push("0");
+            newArr.push("0");
+            $("#topDisplay").append("0");
+            $("#bottomDisplay").html("0");
+
+          }
+
+          // Check if the decimal is entered for the first time
+          if ($(this).val() == "\." && ptCount == 0) {
+
+            ptCount = 1;  // If so, make ptCount = 1
+        
+          // Check if the only one decimal point is entered before an operation symbol
+          } else if ($.isNumeric($(this).val()) == false && $(this).val() !== "\." && ptCount == 1) {
+
+            ptCount = 0;  //If so, make ptCount = 0
+
+          // Check if more than one decimal point is entered before an operation symbol
+          } else if ($(this).val() == "\." && ptCount == 1) {
+
+            return  // If so, return and escape the function without doing anything, meaning only one decimal point is allowed to enter before an operation symbol
+
+          }
+        
+          // Push value (1-9, */+- and decimal point) and name attr (1-9, &divide; &times; &plus; &minus; and decimal point) to arr and newArr, respectively.
+          arr.push($(this).val());
+          newArr.push($(this).attr("name"));
+
+          // Check if two or more decimal points are continously clicked. If so, only accept the last one.
+          if ($(this).val() == "\." && arr[arr.length - 2] == "\.") {
+            arr.splice(-2, 1);
+            newArr.splice(-2, 1);
+            $("#topDisplay").html(newArr.join(""));
+
+          } else {
+
+          $("#topDisplay").append($(this).attr("name"));
+          $("#bottomDisplay").append($(this).attr("name"));
+
+          }
+
+          // Check if two or more operation symbols are continously clicked. If so, only accept the last one.
+          if ($.isNumeric($(this).val()) == false && $(this).val() !== "\." && $.isNumeric(arr[arr.length - 2]) == false && arr[arr.length - 2] !== "\." && arr.length >= 2) {
+            
+            arr.splice(-2, 1);
+            newArr.splice(-2, 1);
+            $("#topDisplay").html(newArr.join(""));
+            $("#bottomDisplay").html($(this).attr("name"));
+
+          }
+
+          // Check if the clicked btn is an operation sign. If so, display its "name" attr at the bottom display section.
+          if ($.isNumeric($(this).val()) == false && $(this).val() !== "\.") {
+            
+            $("#bottomDisplay").html($(this).attr("name"));
+
+          }
+        
+          // Check if a number btn is clicked after an operation symbol. If so, only show the number without the operation symbol at the bottom display section.
+          if ($.isNumeric($(this).val()) && $.isNumeric(arr[arr.length - 2]) == false && arr[arr.length - 2] !== "\.") {
+            
+            $("#bottomDisplay").html($(this).attr("name"));
+
+          }
+
+        }
+
+        // Check if the display number at the bottomDisplay reaches the limit
+        if ($("#bottomDisplay").html().replace(".", "").length > 9) { // If so, show "Reach Digit Limit"
+          
+          $("#topDisplay").html("Reach Digit Limit");
           $("#bottomDisplay").html("0");
+          start = 0;
+          arr = [];
+          newArr = [];
 
-        }
+      }
 
-        // Check if the decimal is entered for the first time
-        if ($(this).val() == "\." && ptCount == 0) {
+    });
 
-          ptCount = 1;  // If so, make ptCount = 1
+      // Run function when AC btn is clicked.
+      $("#acBtn").click(function() {
         
-        // Check if the only one decimal point is entered before an operation symbol
-        } else if ($.isNumeric($(this).val()) == false && $(this).val() !== "\." && ptCount == 1) {
+        arr = [];
+        newArr = [];
+        $("#topDisplay").html("0");
+        $("#bottomDisplay").html("0");
+        start = 0;  
 
-          ptCount = 0;  //If so, make ptCount = 0
+      });
 
-        // Check if more than one decimal point is entered before an operation symbol
-        } else if ($(this).val() == "\." && ptCount == 1) {
-
-          return  // If so, return and escape the function without doing anything, meaning only one decimal point is allowed to enter before an operation symbol
-
-        }
-        
-        // Push value (1-9, */+- and decimal point) and name attr (1-9, &divide; &times; &plus; &minus; and decimal point) to arr and newArr, respectively.
-        arr.push($(this).val());
-        newArr.push($(this).attr("name"));
-
-        // Check if two or more decimal points are continously clicked. If so, only accept the last one.
-        if ($(this).val() == "\." && arr[arr.length - 2] == "\.") {
-          arr.splice(-2, 1);
-          newArr.splice(-2, 1);
-          $("#topDisplay").html(newArr.join(""));
+      // Run function when CE btn is clicked.
+      $("#ceBtn").click(function() {
+      
+        arr.splice(-1, 1);
+        newArr.splice(-1, 1);
+      
+        if (arr.length == 0) {
+          
+          $("#topDisplay").html("0");
+          $("#bottomDisplay").html("0")
+          start = 0;
 
         } else {
 
-        $("#topDisplay").append($(this).attr("name"));
-        $("#bottomDisplay").append($(this).attr("name"));
-
-        }
-
-
-
-
-
-        // Check if two or more operation symbols are continously clicked. If so, only accept the last one.
-        if ($.isNumeric($(this).val()) == false && $(this).val() !== "\." && $.isNumeric(arr[arr.length - 2]) == false && arr[arr.length - 2] !== "\." && arr.length >= 2) {
-          arr.splice(-2, 1);
-          newArr.splice(-2, 1);
           $("#topDisplay").html(newArr.join(""));
-          $("#bottomDisplay").html($(this).attr("name"));
+          $("#bottomDisplay").html(newArr.join(""));
 
         }
 
-        // Check if the clicked btn is an operation sign. If so, display its "name" attr at the bottom display section.
-        if ($.isNumeric($(this).val()) == false && $(this).val() !== "\.") {
-          $("#bottomDisplay").html($(this).attr("name"));
+      });
+
+      // Run function when equal btn is clicked.
+      $("#equalBtn").click(function() {
+
+        var str = arr.join("");
+        console.log(str);
+        result = eval(str);
+        result = parseFloat(result.toFixed(4));
+
+        // Check if the "result" variable reaches the limit
+        if (result.toString().replace(".", "").length > 9) {  // If so, show "Reach Digit Limit"
+          
+          $("#topDisplay").html("Reach Digit Limit");
+          $("#bottomDisplay").html("0");
+          start = 0;
+          arr = [];
+          newArr = [];
+          return
 
         }
-        
-        // Check if a number btn is clicked after an operation symbol. If so, only show the number without the operation symbol at the bottom display section.
-        if ($.isNumeric($(this).val()) && $.isNumeric(arr[arr.length - 2]) == false && arr[arr.length - 2] !== "\.") {
-          $("#bottomDisplay").html($(this).attr("name"));
 
-        }
+        $("#topDisplay").append("=" + result);
+        $("#bottomDisplay").html(result);
+        arr = [];
+        newArr = [];
+        arr.push(result);
+        newArr.push(result);
+        count = 1;
 
-      }
-    });
+      });
 
-   // Run function when AC btn is clicked.
-    $("#acBtn").click(function() {
-      arr = [];
-      newArr = [];
-      $("#topDisplay").html("0");
-      $("#bottomDisplay").html("0");
-      start = 0;  
 
-    });
-
-   // Run function when CE btn is clicked.
-    $("#ceBtn").click(function() {
-      
-      arr.splice(-1, 1);
-      newArr.splice(-1, 1);
-      if (arr.length == 0) {
-        $("#topDisplay").html("0");
-        $("#bottomDisplay").html("0")
-        start = 0;
-      } else {
-      $("#topDisplay").html(newArr.join(""));
-      $("#bottomDisplay").html(newArr.join(""));
-      }
-
-    });
-
-    // Run function when equal btn is clicked.
-    $("#equalBtn").click(function() {
-
-      var str = arr.join("");
-      console.log(str);
-      result = eval(str);
-      result = parseFloat(result.toFixed(6))
-      $("#topDisplay").append("=" + result);
-      $("#bottomDisplay").html(result);
-      arr = [];
-      newArr = [];
-      arr.push(result);
-      newArr.push(result);
-      count = 1;
 
     });
 
