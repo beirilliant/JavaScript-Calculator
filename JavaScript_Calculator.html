@@ -174,11 +174,13 @@
     var start = 0; // 0: the initial stage without any btn clicked; 1: some btn clicked.
     var result;  // To store the calculation result.
     var count = 0;   //0: equal btn not clicked; 1: equal btn clicked.
+    var ptCount = 0;
 
     $(".calBtn").click(function() {
 
       // Below code: Check if equal button is clicked, then reset or chain the following calculation.
       if (count == 1) {
+
         if ($.isNumeric($(this).val())) {
 
           arr = [];
@@ -233,6 +235,17 @@
       
       if (start == 1) { // If some btn has been clicked.
 
+        // Check if demical point "." is clicked after an operation symbol. If so, append "0" to both top and bottom display sections.
+        if ($(this).val() == "\." && $.isNumeric(arr[arr.length - 1]) == false && arr[arr.length - 1] !== ".") {
+
+          arr.push("0");
+          newArr.push("0");
+          $("#topDisplay").append("0");
+          $("#bottomDisplay").html("0");
+
+        }
+        
+        // Push value (1-9, */+- and decimal point) and name attr (1-9, &divide; &times; &plus; &minus; and decimal point) to arr and newArr, respectively.
         arr.push($(this).val());
         newArr.push($(this).attr("name"));
 
@@ -248,6 +261,9 @@
         $("#bottomDisplay").append($(this).attr("name"));
 
         }
+
+
+
 
         // Check if two or more operation symbols are continously clicked. If so, only accept the last one.
         if ($.isNumeric($(this).val()) == false && $(this).val() !== "\." && $.isNumeric(arr[arr.length - 2]) == false && arr[arr.length - 2] !== "\." && arr.length >= 2) {
@@ -301,6 +317,7 @@
 
     // Run function when equal btn is clicked.
     $("#equalBtn").click(function() {
+
       var str = arr.join("");
       console.log(str);
       result = eval(str);
