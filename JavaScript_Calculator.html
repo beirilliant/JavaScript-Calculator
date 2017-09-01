@@ -322,12 +322,25 @@
         newArr = [];
         $("#topDisplay").html("0");
         $("#bottomDisplay").html("0");
-        start = 0;  
+        start = 0; 
+        count = 0; 
 
       });
 
       // Run function when CE btn is clicked.
       $("#ceBtn").click(function() {
+
+        if (count == 1) {
+          
+          arr = [];
+          newArr = [];
+          $("#topDisplay").html("0");
+          $("#bottomDisplay").html("0");
+          start = 0; 
+          count = 0;
+          return
+
+        }
       
         arr.splice(-1, 1);
         newArr.splice(-1, 1);
